@@ -1,3 +1,4 @@
+/* global __firebase_config, __initial_auth_token, __app_id */
 import React, { useState, useEffect, useRef } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
@@ -456,7 +457,7 @@ const App = () => {
         try {
             await Promise.all(updates);
             // Log individual restocks or a single bulk restock
-            const restockDescription = restockCart.map(item => `${item.quantityToRestock} of ${item.name}`).join(', ');
+            const restockDescription = restockCart.map(item => `${item.quantityToStock} of ${item.name}`).join(', ');
             await addDoc(collection(db, `artifacts/${appId}/users/${userId}/activities`), {
                 timestamp: serverTimestamp(),
                 type: 'STOCK_UPDATED',
